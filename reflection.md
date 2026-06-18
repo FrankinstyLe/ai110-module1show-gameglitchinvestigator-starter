@@ -20,7 +20,7 @@ Document at least 3 bugs you found. Add rows as needed.
 | Starting new game after winning/losing | New game starts, no need to refresh webpage | The announcement stays the same, no new game started | Game over. Start a new game to try again./ You won!...|
 | Hit "Enter" to submit | Input taken, shows hints | Input not taken| None | 
 | Submit Guess | History records correct attempts | History misrecords 1 attempt | Attempts: 8, History:[0:1, 1:2, 2:3, 3:15, 4:16, 5:15, 6:14] |
-
+| Entering alphabic answer | Only count numeric answers as attempts | Game does not stop and let attempts go to negative and keep recorded in History | Attempts left: -4 |
 ---
 
 ## 2. How did you use AI as a teammate?
