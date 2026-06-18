@@ -10,7 +10,7 @@ def get_range_for_difficulty(difficulty: str):
         return 1, 100
     return 1, 100
 
-
+#FIXME pressing Enter to submit
 def parse_guess(raw: str):
     if raw is None:
         return False, None, "Enter a guess."
@@ -92,8 +92,9 @@ st.sidebar.caption(f"Attempts allowed: {attempt_limit}")
 if "secret" not in st.session_state:
     st.session_state.secret = random.randint(low, high)
 
+#FIXME: resetting attempts to 0 on launch too
 if "attempts" not in st.session_state:
-    st.session_state.attempts = 1
+    st.session_state.attempts = 0
 
 if "score" not in st.session_state:
     st.session_state.score = 0
@@ -130,6 +131,7 @@ with col2:
     new_game = st.button("New Game 🔁")
 with col3:
     show_hint = st.checkbox("Show hint", value=True)
+
 
 if new_game:
     st.session_state.attempts = 0

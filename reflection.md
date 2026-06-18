@@ -19,6 +19,7 @@ Document at least 3 bugs you found. Add rows as needed.
 | Difficulty level | Easy: range 1 - 20, Normal: range 1 - 50, Hard: range 1 - 100 | Secret number assigned randomly no matter the difficulty | None |
 | Starting new game after winning/losing | New game starts, no need to refresh webpage | The announcement stays the same, no new game started | Game over. Start a new game to try again./ You won!...|
 | Hit "Enter" to submit | Input taken, shows hints | Input not taken| None | 
+| Submit Guess | History records correct attempts | History misrecords 1 attempt | Attempts: 8, History:[0:1, 1:2, 2:3, 3:15, 4:16, 5:15, 6:14] |
 
 ---
 
