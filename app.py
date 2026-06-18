@@ -10,7 +10,6 @@ def get_range_for_difficulty(difficulty: str):
         return 1, 100
     return 1, 100
 
-#FIXME pressing Enter to submit
 def parse_guess(raw: str):
     if raw is None:
         return False, None, "Enter a guess."
@@ -104,14 +103,14 @@ st.info(
     f"Attempts left: {attempt_limit - st.session_state.attempts}"
 )
 
-raw_guess = st.text_input(
-    "Enter your guess:",
-    key=f"guess_input_{difficulty}"
-)
+with st.form(key=f"guess_form_{difficulty}"):
+    raw_guess = st.text_input(
+        "Enter your guess:",
+        key=f"guess_input_{difficulty}"
+    )
+    submit = st.form_submit_button("Submit Guess 🚀")
 
-col1, col2, col3 = st.columns(3)
-with col1:
-    submit = st.button("Submit Guess 🚀")
+col2, col3 = st.columns(2)
 with col2:
     new_game = st.button("New Game 🔁")
 with col3:
