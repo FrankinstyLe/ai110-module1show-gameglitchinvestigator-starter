@@ -46,7 +46,7 @@ def check_guess(guess, secret):
     else:
         return "Too Low", "📉 Go HIGHER!"
 
-
+#FIXME: Complex scoring logic that is hard to understand. Refactor to be simpler and more intuitive.
 def update_score(current_score: int, outcome: str, attempt_number: int):
     """Update score based on outcome and attempt number."""
     if outcome == "Win":

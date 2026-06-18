@@ -21,6 +21,8 @@ Document at least 3 bugs you found. Add rows as needed.
 | Hit "Enter" to submit | Input taken, shows hints | Input not taken| None | 
 | Submit Guess | History records correct attempts | History misrecords 1 attempt | Attempts: 8, History:[0:1, 1:2, 2:3, 3:15, 4:16, 5:15, 6:14] |
 | Entering alphabic answer | Only count numeric answers as attempts | Game does not stop and let attempts go to negative and keep recorded in History | Attempts left: -4 |
+| Guessing Score Logic | 90 points max for correct guessing on first try + the penalty for a wrong guess consistent - 5 | 80 points max for correct guessing on first try + "Too High" guess on even attempt is more beneficial |
+None |
 ---
 
 ## 2. How did you use AI as a teammate?
