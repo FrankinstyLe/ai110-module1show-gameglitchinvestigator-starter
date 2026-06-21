@@ -62,10 +62,7 @@ if difficulty != st.session_state.last_difficulty:
 
 st.subheader("Make a guess")
 
-st.info(
-    f"Guess a number between {low} and {high}. "
-    f"Attempts left: {attempt_limit - st.session_state.attempts}"
-)
+info_placeholder = st.empty()
 
 with st.form(key=f"guess_form_{difficulty}"):
     raw_guess = st.text_input(
@@ -103,6 +100,9 @@ if submit:
     if not ok:
         st.session_state.history.append(raw_guess)
         st.error(err)
+    elif guess_int < low or guess_int > high:
+        st.session_state.history.append(guess_int)
+        st.warning(f"⚠️ Out of range! Pick a number between {low} and {high}.")
     else:
         st.session_state.attempts += 1
         st.session_state.history.append(guess_int)
@@ -135,6 +135,11 @@ if submit:
                     f"The secret was {st.session_state.secret}. "
                     f"Score: {st.session_state.score}"
                 )
+
+info_placeholder.info(
+    f"Guess a number between {low} and {high}. "
+    f"Attempts left: {attempt_limit - st.session_state.attempts}"
+)
 
 with st.expander("Developer Debug Info"):
     st.write("Secret:", st.session_state.secret)
