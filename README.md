@@ -25,28 +25,35 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+- [x] The game generates a secrect number and gives player a number of attempt and a range to guess within.
+- [x] Overal game logic (hints, scoring, attempts count/mismatch). Some UI functionalities (delay on real-time updates, inputs take-in, incorrect information showing from player's POV)
+- [x] Code refactoring, AI edits, Game logic rewiring.
 
 ## 📸 Demo Walkthrough
 
 Describe your fixed game in numbered steps so a reader can follow along without watching a video:
 
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
+1. When first launch the game, select difficulty level from drop-down menu on you left. Make sure "Show hint" box is ticked.
+2. Enter a guess as instructed. Adjust your next guesses based on hint.
+3. If hint says "Go Lower", enter a lower value than previous guess. Do otherwise if hint says "Go Higher"
+4. Score updates correctly after each guess, it goes down after each wrong guess. Max score depends on difficulties and number of attempts used. New game/difficulty resets the score.
+5. Game ends after the correct guess or no more attempts left. 
 
-**Screenshot** *(optional)*: <!-- Insert a screenshot of your fixed, winning game here -->
+**Screenshot** *(optional)*: ![alt text](<Winning screenshot.png>)
 
 ## 🧪 Test Results
 
 ```
-# Paste your pytest output here, e.g.:
-# pytest tests/
-# ========================= X passed in 0.XXs =========================
+======================================== test session starts =========================================
+platform win32 -- Python 3.13.1, pytest-8.4.1, pluggy-1.6.0
+rootdir: C:\Users\Frankinstyle\CodePath\AI110\Project 1\ai110-module1show-gameglitchinvestigator-starter
+plugins: anyio-4.9.0, asyncio-1.1.0, cov-6.2.1
+asyncio: mode=Mode.STRICT, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 13 items                                                                                    
+
+tests\test_game_logic.py .............                                                          [100%]
+
+========================================= 13 passed in 0.03s =========================================
 ```
 
 ## 🚀 Stretch Features

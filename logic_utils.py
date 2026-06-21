@@ -49,7 +49,7 @@ def check_guess(guess, secret):
         return "Too Low", "📉 Go HIGHER!"
 
 # FIX: Scoring was off — a first-try win only gave 80 (it used attempt_number + 1) and "Too High" on even attempts handed out +5 instead of a penalty. Working with agent mode I traced it to the bug repro log, then dropped the +1 offset and made every wrong guess a consistent -5.
-#FIX: Remove unreachable floor because points will never go below 10 with highest attempt never passes 9 accorss all difficulties.
+# FIX: Remove unreachable floor because points will never go below 10 with highest attempt never passes 9 accorss all difficulties.
 def update_score(current_score: int, outcome: str, attempt_number: int):
     """Update score based on outcome and attempt number."""
     if outcome == "Win":
@@ -61,5 +61,5 @@ def update_score(current_score: int, outcome: str, attempt_number: int):
 
     if outcome == "Too Low":
         return current_score - 5
-
+    
     return current_score
