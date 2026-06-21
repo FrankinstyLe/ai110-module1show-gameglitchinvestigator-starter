@@ -1,3 +1,4 @@
+# FIX: Refactored these helpers out of app.py into logic_utils.py using agent mode (Claude) so the game logic is testable and isolated from the Streamlit UI.
 def get_range_for_difficulty(difficulty: str):
     """Return (low, high) inclusive range for a given difficulty."""
     if difficulty == "Easy":
@@ -41,11 +42,13 @@ def check_guess(guess, secret):
     if guess == secret:
         return "Win", "🎉 Correct!"
 
+    # FIX: Hints were reversed (guess too high told you to go HIGHER). I spotted it from the bug repro log and had agent mode flip the messages so "too high" -> go LOWER and "too low" -> go HIGHER.
     if guess > secret:
         return "Too High", "📈 Go LOWER!"
     else:
         return "Too Low", "📉 Go HIGHER!"
 
+# FIX: Scoring was off — a first-try win only gave 80 (it used attempt_number + 1) and "Too High" on even attempts handed out +5 instead of a penalty. Working with agent mode I traced it to the bug repro log, then dropped the +1 offset and made every wrong guess a consistent -5.
 #FIX: Remove unreachable floor because points will never go below 10 with highest attempt never passes 9 accorss all difficulties.
 def update_score(current_score: int, outcome: str, attempt_number: int):
     """Update score based on outcome and attempt number."""

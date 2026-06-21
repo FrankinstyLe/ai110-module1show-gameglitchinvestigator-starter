@@ -27,18 +27,17 @@ None |
 
 ## 2. How did you use AI as a teammate?
 
-- Which AI tools did you use on this project (for example: ChatGPT, Gemini, Copilot)?
-- Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
-- Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
+- I used Claude
+- There was a bug of hint jumping between "Go Higher" and "Go Lower" on some inconsistent guesses. I thought the bug was in check_guess, but Claude pointed out it was belonging in one of st codes, where secret was being compared as string instead of integer.
+- I tried to fixed the untimely update with the Developer Debug Info, the AI instead reinvented the UI. It was a bug related to Streamlit execution-order. I refined the prompt by asking it not to change the UI design.
 
 ---
 
 ## 3. Debugging and testing your fixes
 
-- How did you decide whether a bug was really fixed?
-- Describe at least one test you ran (manual or using pytest)  
-  and what it showed you about your code.
-- Did AI help you design or understand any tests? How?
+- I tested the fixes directly in the game
+- A "Too High" guess on an even attempt used to ADD 5. After the fix, it consistently subtracted by 5 like any other wrong guess. The code is simplified and and makes more sense. 
+- Yes, it included tests I didn't think of. Like when answering a float type guess, it will only validate int part.
 
 ---
 

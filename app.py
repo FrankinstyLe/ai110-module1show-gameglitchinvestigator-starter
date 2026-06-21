@@ -21,6 +21,7 @@ difficulty = st.sidebar.selectbox(
     index=1,
 )
 
+# FIX: Easy and Normal attempt limits were swapped (Easy gave fewer tries than Normal). I caught it while playtesting and corrected the mapping with agent mode.
 attempt_limit_map = {
     "Easy": 8,
     "Normal": 6,
@@ -28,6 +29,7 @@ attempt_limit_map = {
 }
 attempt_limit = attempt_limit_map[difficulty]
 
+# FIX: Difficulty range was ignored (secret was always 1-100). Agent mode and I routed it through get_range_for_difficulty so low/high actually match the selected difficulty.
 low, high = get_range_for_difficulty(difficulty)
 
 st.sidebar.caption(f"Range: {low} to {high}")
@@ -37,6 +39,7 @@ if "secret" not in st.session_state:
     st.session_state.secret = random.randint(low, high)
 
 
+# FIX: Attempts started at 1, so "attempts left" was off by one from the first guess. Agent mode helped me trace the count and reset it to 0.
 if "attempts" not in st.session_state:
     st.session_state.attempts = 0
 
@@ -49,6 +52,7 @@ if "status" not in st.session_state:
 if "history" not in st.session_state:
     st.session_state.history = []
 
+# FIX: Changing difficulty mid-game left the old secret/range in place. Agent mode and I added last_difficulty tracking so switching difficulty resets the game state.
 if "last_difficulty" not in st.session_state:
     st.session_state.last_difficulty = difficulty
 
@@ -64,6 +68,7 @@ st.subheader("Make a guess")
 
 info_placeholder = st.empty()
 
+# FIX: Pressing Enter didn't submit a guess (it was a plain button). Agent mode suggested wrapping the input in st.form so Enter submits, and I used a placeholder so the info line updates on the same click.
 with st.form(key=f"guess_form_{difficulty}"):
     raw_guess = st.text_input(
         "Enter your guess:",
@@ -78,6 +83,7 @@ with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
 
+# FIX: After a win/loss, starting a new game didn't reset without refreshing the page. Agent mode and I made New Game clear score/status/history and st.rerun() so it restarts instantly.
 if new_game:
     st.session_state.attempts = 0
     st.session_state.score = 0
@@ -97,6 +103,7 @@ if st.session_state.status != "playing":
 if submit:
     ok, guess_int, err = parse_guess(raw_guess)
 
+    # FIX: Attempts were incremented on every submit, so non-numeric / out-of-range inputs burned tries (count even went negative). Agent mode and I moved the increment into the valid-guess branch and added an out-of-range check so only real guesses count.
     if not ok:
         st.session_state.history.append(raw_guess)
         st.error(err)
@@ -109,6 +116,7 @@ if submit:
 
         secret = st.session_state.secret
 
+        # FIX: On even attempts the secret was cast to a string, which broke comparisons and the hints. Agent mode and I removed that glitch above so the secret stays an int every time.
         outcome, message = check_guess(guess_int, secret)
 
         if show_hint:
@@ -141,6 +149,7 @@ info_placeholder.info(
     f"Attempts left: {attempt_limit - st.session_state.attempts}"
 )
 
+# FIX: Debug info was rendered before the guess was processed, so it lagged one click behind. Agent mode and I moved it to the end so it shows the latest attempt/score/history on the same click.
 with st.expander("Developer Debug Info"):
     st.write("Secret:", st.session_state.secret)
     st.write("Attempts:", st.session_state.attempts)
