@@ -46,13 +46,11 @@ def check_guess(guess, secret):
     else:
         return "Too Low", "📉 Go HIGHER!"
 
-
+#FIX: Remove unreachable floor because points will never go below 10 with highest attempt never passes 9 accorss all difficulties.
 def update_score(current_score: int, outcome: str, attempt_number: int):
     """Update score based on outcome and attempt number."""
     if outcome == "Win":
         points = 100 - 10 * attempt_number
-        if points < 10:
-            points = 10
         return current_score + points
 
     if outcome == "Too High":
