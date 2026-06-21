@@ -138,6 +138,8 @@ if submit:
         else:
             if st.session_state.attempts >= attempt_limit:
                 st.session_state.status = "lost"
+                # FIX: When player lose, score = 0 instead of going negative.
+                st.session_state.score = 0
                 st.error(
                     f"Out of attempts! "
                     f"The secret was {st.session_state.secret}. "
